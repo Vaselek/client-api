@@ -7,6 +7,7 @@ const User = require('../models/User');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
+    console.log(req.body)
     const user = new User({
         username: req.body.username,
         password: req.body.password
@@ -16,9 +17,10 @@ router.post('/', async (req, res) => {
 
     try {
         await user.save();
+        console.log(user);
         return res.send({message: 'User registered', user});
     } catch (error) {
-        return res.send(400).send(error)
+        return res.sendStatus(error)
     }
 });
 
